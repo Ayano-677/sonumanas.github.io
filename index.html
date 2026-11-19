@@ -437,7 +437,7 @@
                     <option value="1500" data-mode="sqft" data-high="1.67" data-labour="300" data-labour-high="1.5">Kitchen Cabinets &amp; Shutters</option>
                     <option value="1300" data-mode="sqft" data-high="1.69" data-labour="300" data-labour-high="1.5">Crockery Unit</option>
                     <option value="0" data-quote="1">Kitchen Trolley / Drawer Unit</option>
-                    <option value="0" data-quote="1">Pantry / Kitchen Storage Unit</option>
+                    <option value="0" data-mode="sqft" data-labour="300" data-labour-high="1.5">Pantry / Kitchen Storage Unit</option>
                   </optgroup>
                   <optgroup label="Bedroom">
                     <option value="1200" data-mode="sqft" data-high="1.5" data-labour="250" data-labour-high="1.4" selected>Wardrobe / Almirah (Hinged, Laminate)</option>
@@ -456,7 +456,7 @@
                   <optgroup label="Living Room">
                     <option value="1100" data-mode="sqft" data-high="1.45" data-labour="250" data-labour-high="1.4">TV Unit / Wall Panel</option>
                     <option value="300" data-mode="sqft" data-high="1.67" data-labour="200" data-labour-high="1.4">Fluted Wall Panel / Wall Panelling</option>
-                    <option value="0" data-quote="1">Partition / Room Divider</option>
+                    <option value="0" data-mode="sqft" data-labour="200" data-labour-high="1.4">Partition / Room Divider</option>
                     <option value="25000" data-mode="piece" data-unit="set" data-high="1.8">Dining Table Set — 4 Seater</option>
                     <option value="35000" data-mode="piece" data-unit="set" data-high="1.86">Dining Table Set — 6 Seater</option>
                     <option value="0" data-quote="1">Center Table / Coffee Table</option>
@@ -480,7 +480,7 @@
                   <optgroup label="Storage &amp; Utility">
                     <option value="1200" data-mode="sqft" data-high="1.5" data-labour="300" data-labour-high="1.83">Shoe Rack</option>
                     <option value="900" data-mode="sqft" data-high="1.33" data-labour="250" data-labour-high="1.4">Loft Covering / Loft Storage</option>
-                    <option value="0" data-quote="1">Storage Unit / Box Storage</option>
+                    <option value="0" data-mode="sqft" data-labour="250" data-labour-high="1.4">Storage Unit / Box Storage</option>
                     <option value="0" data-quote="1">Folding Table / Wall-Mounted Table</option>
                     <option value="8000" data-mode="piece" data-unit="piece" data-high="2.5">Computer Table</option>
                   </optgroup>
@@ -826,7 +826,7 @@
               rateEl.textContent = "₹" + labourRate.toLocaleString("en-IN") + " / sq.ft (labour)";
               amountEl.textContent = area > 0 ? fmt(ltotal) + " – " + fmt(ltotal * labourHigh) : "—";
               noteEl.textContent = matByVal === "customer" ? NOTE_LABOUR_CUSTOMER : NOTE_LABOUR_CARPENTER;
-              if (area > 0) {
+              if (area > 0 && base > 0) {
                 totalLineEl.hidden = false;
                 totalLineEl.textContent = "Estimated total budget including material: " + fmt(total) + " – " + fmt(total * highF);
               }
@@ -836,7 +836,7 @@
                 "Material option: " + matByWa + "\n" +
                 "Size: " + w + " x " + h + " ft (" + (Math.round(area * 10) / 10) + " sq.ft)\n" +
                 "Carpenter charges (labour only): " + amountEl.textContent + "\n" +
-                "Estimated total budget including material: " + fmt(total) + " – " + fmt(total * highF) + "\n" +
+                (base > 0 ? "Estimated total budget including material: " + fmt(total) + " – " + fmt(total * highF) + "\n" : "") +
                 "Please schedule a site visit for an exact quote.";
             } else {
               labelEl.textContent = "Your estimated budget";
